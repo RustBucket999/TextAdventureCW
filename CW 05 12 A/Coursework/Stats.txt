@@ -1,0 +1,68 @@
+HP:100
+STR:50
+ARM:10 
+
+Item: Strongbox
+Description: A sturdy box. It has seen better times.
+Contents: Red Key, Letter
+Keys: Screwdriver
+
+Item: Screwdriver
+Description: A flathead screwdriver. Useful for prying things open.
+
+Item: Red Key
+Description: A small red key. It looks like it could open a door.
+
+Item: Rubber Duck
+Description: It squeeks when you squeeze!
+
+Item: Letter
+Description: A handwritten letter. It reads: "Meet me in the basement. -X"
+
+Item: Skeleton
+Description: Ye old knucklebones. He likes to go 'doot doot' at the bars on wednesdays. Has been losing weight.
+
+Item: Cake
+Description: Do not believe it.
+
+Item: Ghost
+Description: AAAAAAAAAAAAAAAAAAAAAAAAAAA!
+
+
+Location: 1
+Name: Front Porch
+Description: You are standing in front of a mansion on the front porch. The door to the north is locked. It is chilly outside.
+Contents: Screwdriver, Strongbox
+WEST 3
+NORTH 2, Red Key
+IN 2, Red Key
+
+Location: 2
+Name: Main Hall
+Description: You are inside the main hall. There is a kitchen to the north, a bathroom to the east, and a large staircase that looks like it has seen better days. "I hope I don't get attacked by a bear" you think to yourself.
+Contents: Rubber Duck
+Enemy: Bear, 150, 20, 5
+SOUTH 1
+NORTH 4
+OUT 1
+
+Location: 3
+Name: Bathroom
+Description: You are in a bathroom. There is a sink with a cupboard, a toilet with no paper, and a bathtub with depression.
+Contents: 
+EAST 2
+BATHTUB 999 Secret Key
+
+Location: 4
+Name: Kitchen
+Description: You are in a kitchen. There is a table with a delicious cake on it. The sink seems clogged. There are no knives.
+Contents: Cake
+SOUTH 2
+WEST 5
+
+Location: 5
+Name: Basement
+Description: You are inside the Basement. There is a closet with skeletons inside it.
+Contents: Skeleton, Ghost
+EAST 4
+

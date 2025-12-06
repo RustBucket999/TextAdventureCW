@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\w2022535.INTRANET\Downloads\CW 4.12.25\Coursework\Coursework\main.cpp(224,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\w2022535.INTRANET\Downloads\CW 4.12.25\Coursework\Coursework\main.cpp(275,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Coursework.vcxproj -> C:\Users\w2022535.INTRANET\Downloads\CW 4.12.25\Coursework\x64\Debug\Coursework.exe
