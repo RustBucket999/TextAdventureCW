@@ -390,7 +390,7 @@ int main()
 			{
 				std::cout << "- " << i->GetName() << ": " << i->GetDescription() << "\n";
 			}
-			std::cin >> playerInput;
+			std::cin >> playerInput;         //CHANGE THE CODE TO BETTER FIX SPECIFICATION. PROBS EASIER TO DELETE EVERYTHING AFTER HERE.
 			// Interact code here
 			// Move location code here
 			if (playerInput == "NORTH")
