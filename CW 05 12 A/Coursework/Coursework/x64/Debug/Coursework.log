@@ -1,4 +1,4 @@
-﻿  Inventory.cpp
-  Player.cpp
-  Generating Code...
-  Coursework.vcxproj -> C:\Users\danie\Desktop\CW 05 12 A\Coursework\x64\Debug\Coursework.exe
+﻿  main.cpp
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\main.cpp(196,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\main.cpp(225,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Coursework.vcxproj -> D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\x64\Debug\Coursework.exe

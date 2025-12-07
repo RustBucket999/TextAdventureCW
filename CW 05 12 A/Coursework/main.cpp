@@ -192,7 +192,8 @@ int main()
 	std::string contentData = "";
 	std::string itemData = "";
 	std::vector <Item*> itemList;
-	//Something for finding the last item
+
+	int count = locationMap.size() - 1;
 	while (creatingGame)
 	{
 	// Create Locations
@@ -358,7 +359,7 @@ int main()
 	
 	}
 
-	int count = locationMap.size() - 1;
+	
 	Location* currentLocation = locationMap[0];
 	Location* nextLocation = locationMap[1];
 	std::cout << "Welcome to the game, type 'start' to proceed. Type 'exit' to quit. After beginning play, type 'help' for help." << "\n";
@@ -390,40 +391,39 @@ int main()
 			{
 				std::cout << "- " << i->GetName() << ": " << i->GetDescription() << "\n";
 			}
-			std::cin >> playerInput;         //CHANGE THE CODE TO BETTER FIX SPECIFICATION. PROBS EASIER TO DELETE EVERYTHING AFTER HERE.
-			// Interact code here
-			// Move location code here
-			if (playerInput == "NORTH")
+			//std::cin >> playerInput;         //CHANGE THE CODE TO BETTER FIX SPECIFICATION. PROBS EASIER TO DELETE EVERYTHING AFTER HERE.
+			std::getline(std::cin, playerInput);
+			// take the player's input and split between "verb" and "noun" if applicable
+			std::string verb = "";
+			std::string noun = "";
+			bool whichHalf = false;
+			std::string tempInput = "";
+			count = 0;
+			for (auto& c : playerInput)  // separate the input into 2 halves.
 			{
-				if (currentLocation->GetID() + 1 > count)
+				count++;
+				if (c == ' ' || count == playerInput.length())
 				{
-					std::cout << "You cannot walk there." << "\n";
-					continue;
-				}
-				int nextID = currentLocation->GetID() + 1;
-				nextLocation = locationMap[nextID];
-				currentLocation = nextLocation;
-				nextLocation = nullptr;
-				
-			}
-			else if (playerInput == "SOUTH")
-			{
-				if (currentLocation->GetID() - 1 < 0)
-				{
-					std::cout << "You cannot walk there." << "\n";
-					continue;
-				}
-				int nextID = currentLocation->GetID() - 1;
-				nextLocation = locationMap[nextID];
-				currentLocation = nextLocation;
-				nextLocation = nullptr;
+					if (!whichHalf) 
+					{
+						whichHalf = true;
+						verb = tempInput;
+						tempInput = "";
+					}
+					else
+					{
+						tempInput += c;
+						whichHalf = false;
+						noun = tempInput;
+						tempInput = "";
+					}
 
-			}
-			else
-			{
-				std::cout << "Invalid command." << "\n";
-			}
-			
+				}
+				else
+				{
+					tempInput += c;
+				}
+			}  
 
 		}
 		

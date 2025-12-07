@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Inventory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -54,8 +54,7 @@
               "RelativeToolTip": "Inventory.cpp",
               "ViewState": "AgIAABkAAAAAAAAAAAArwDEAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-12-06T21:34:39.067Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-06T21:34:39.067Z"
             },
             {
               "$type": "Document",
@@ -95,13 +94,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "main.cpp",
               "DocumentMoniker": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAAGoBAAAAAAAAAAAEwIgBAACAAAAAAAAAAA==",
+              "ViewState": "AgIAAHcBAAAAAAAAAAAmwLMBAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-12-05T16:50:05.122Z",
               "EditorCaption": ""
@@ -138,13 +137,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Player.h",
               "DocumentMoniker": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Player.h",
               "RelativeDocumentMoniker": "Player.h",
               "ToolTip": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Player.h",
               "RelativeToolTip": "Player.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-12-05T17:18:57.929Z",
               "EditorCaption": ""
