@@ -21,6 +21,11 @@ Item* Inventory::GetItem(Item* i)
 	return nullptr;
 }
 
+std::list<Item*> Inventory::GetInventory()
+{
+	return inventory;
+}
+
 void Inventory::AddItem(Item* newItem)
 {
 	inventory.push_back(newItem);

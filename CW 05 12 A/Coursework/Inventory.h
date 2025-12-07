@@ -14,9 +14,11 @@ private:
 	
 public:
 	Item* GetItem(Item* item);
+	std::list<Item*> GetInventory();
 	void AddItem(Item* newItem);
 	void RemoveItem(Item* i);
 	void ReadInventory();
 	bool InspectItem(Item* i);
+	
 };
 

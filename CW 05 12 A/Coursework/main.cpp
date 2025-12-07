@@ -2,8 +2,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <list>
 #include "Item.h"
+#include "Inventory.h"
 #include "Player.h"
 #include "Location.h"
 
@@ -125,6 +125,41 @@ Location* CreateLocation(int id)
 	return location;
 }
 
+std::string NormaliseString(std::string victim)
+{
+	for (auto& v : victim)
+	{
+		v = std::tolower(v);
+	}
+	return victim;
+}
+Item* SearchInventory(std::string itemName, Player* p)
+{
+	for (Item* ite : p->GetInventory()->GetInventory())
+	{
+		std::string tempIte = NormaliseString(ite->GetName());
+		if (tempIte == itemName)
+		{
+			return ite;
+		}
+	}
+}
+
+void Look(Player* p)
+{
+	std::cout << "--------------------" << "\n";
+	std::cout << "You have a look and see: " << "\n";
+	std::cout << p->location->GetDescription() << "\n";
+	std::cout << "There are " << p->location->GetContents().size() << " items here." << "\n";
+	for (Item* i : p->location->GetContents())
+	{
+		std::cout << "- " << i->GetName() << ": " << i->GetDescription() << "\n";
+	}
+	for (int i = 0; i < p->location->GetDirectionNames().size(); i++)
+	{
+		std::cout << "There's a path: " << p->location->GetDirectionNames()[i] << "\n";
+	}
+}
 int main()
 {
 	/*
@@ -191,9 +226,12 @@ int main()
 	std::string locationData = "";
 	std::string contentData = "";
 	std::string itemData = "";
-	std::vector <Item*> itemList;
 
+	std::vector <Item*> itemList;
 	int count = locationMap.size() - 1;
+
+	Inventory* inventory = new Inventory();
+	Player* player = new Player(inventory);
 	while (creatingGame)
 	{
 	// Create Locations
@@ -227,15 +265,17 @@ int main()
 			{
 				if (i > 0)
 				{
-					locationMap[i]->AddDirection("SOUTH", locationMap[i- 1]);
+					locationMap[i]->AddDirection("south", locationMap[i- 1]);
 				}
 				if (i + 1 < count)
 				{
-					locationMap[i]->AddDirection("NORTH", locationMap[i + 1]);
+					locationMap[i]->AddDirection("north", locationMap[i + 1]);
 				}
 			}
 
 			createdLastLocation = true;
+			player->SetLocation(locationMap[0]);
+			
 		}
 		if (createdLastLocation)
 		{
@@ -360,8 +400,14 @@ int main()
 	}
 
 	
-	Location* currentLocation = locationMap[0];
-	Location* nextLocation = locationMap[1];
+	std::vector<std::string> verbList = {"north", "south", "west", "east", "in", "out", "up", "down", "take", "help", "drop", "open", "quit", "look"};
+	std::vector<std::string> nounList = {};
+
+	for (Item* item : itemList)
+	{
+		nounList.push_back(NormaliseString(item->GetName()));
+	}
+
 	std::cout << "Welcome to the game, type 'start' to proceed. Type 'exit' to quit. After beginning play, type 'help' for help." << "\n";
 	while (gameLoop)
 	{
@@ -375,28 +421,18 @@ int main()
 			std::cout << "Invalid input, please try again." << "\n";
 			continue;
 		}
+		Look(player);
 		//Main game loop here
 		while (gameLoop)
 		{
-			std::cout << "LOCATION NUMBER :::" << currentLocation->GetID() << "\n";
-			std::cout << currentLocation->GetName() << "\n";
-			std::cout << "--------------------" << "\n";
-			std::cout << currentLocation->GetDescription() << "\n";
-			std::cout << "There are " << currentLocation->GetContents().size() << " items here." << "\n";
-			for (int i = 0; i < currentLocation->GetDirectionNames().size(); i++)
-			{
-				std::cout << "GO: " << currentLocation->GetDirectionNames()[i] << "\n";
-			}
-			for (Item* i : currentLocation->GetContents())
-			{
-				std::cout << "- " << i->GetName() << ": " << i->GetDescription() << "\n";
-			}
-			//std::cin >> playerInput;         //CHANGE THE CODE TO BETTER FIX SPECIFICATION. PROBS EASIER TO DELETE EVERYTHING AFTER HERE.
 			std::getline(std::cin, playerInput);
 			// take the player's input and split between "verb" and "noun" if applicable
 			std::string verb = "";
 			std::string noun = "";
 			bool whichHalf = false;
+			bool verbFinish = false;
+			bool foundCommand = false;
+			bool allowNoun = false;
 			std::string tempInput = "";
 			count = 0;
 			for (auto& c : playerInput)  // separate the input into 2 halves.
@@ -404,13 +440,20 @@ int main()
 				count++;
 				if (c == ' ' || count == playerInput.length())
 				{
+					
 					if (!whichHalf) 
 					{
 						whichHalf = true;
+						verbFinish = true;
+						if (count == playerInput.length())
+						{
+							tempInput += c;
+						}
 						verb = tempInput;
 						tempInput = "";
+						continue;
 					}
-					else
+					if (count == playerInput.length())
 					{
 						tempInput += c;
 						whichHalf = false;
@@ -419,11 +462,113 @@ int main()
 					}
 
 				}
-				else
+				if ((c != ' ' && verbFinish == false) || verbFinish == true)
 				{
 					tempInput += c;
 				}
-			}  
+				
+			}
+			if (verb != "")
+			{
+				verb = NormaliseString(verb);
+				for (std::string d : verbList)
+				{
+					if (d == verb)
+					{
+						std::cout << "success!" << "\n";
+						for (std::string dir : player->location->GetDirectionNames())
+						{
+							if (dir == verb)
+							{
+								player->PlayerMove(player->location->GetDirections()[verb]);
+								Look(player);
+								foundCommand = true;
+								break;
+							}
+						}
+						if (d == verb && d == "help")
+						{
+							std::cout << "So here's the deal." << "\n";
+							std::cout << "Controls: " << "\n";
+							std::cout << "Messages you send are split like this Verb | Nouns. The first word is always a verb, everything after is counted as noun." << "\n";
+							std::cout << "To move just type out the direction you want to move in, it will be treated as a verb. The full list of directions is below." << "\n";
+							std::cout << "\n" << "north, south, west, east, in, out, up, down" << "\n" << "\n";
+							std::cout << "Afterwards just type 'Look', to get a description of the sorrounding area.";
+							std::cout << "To pick up or drop items, write 'Take/Drop [OBJECT NAME]'. Example below" << "\n";
+							std::cout << "\n" << "Take Screwdriver" << "\n" << "\n";
+							std::cout << "To open containers you need to first pick them out, then if you have the key in your inventory you can open them like the example bellow." << "\n";
+							//std::cout << "\n" << "Open Strongbox" << "\n" << "\n"; MAKE SURE THIS IS ACCURATE WHEN IT IS IMPLEMENTED
+							std::cout << "Similarly, you can inspect items in your inventory to get a description of them." << "\n";
+
+							foundCommand = true;
+
+						}
+						else if ((d == verb && d == "take") || (d == verb && d == "drop"))
+						{
+							allowNoun = true; // continued from line 488
+							foundCommand = true;
+						}
+						else if (d == verb && d == "look")
+						{
+							Look(player);
+
+							foundCommand = true;
+						}
+						else if (d == verb && d == "open")
+						{
+							std::cout << "CONTAINERS NOT IMPLEMENTED YET.";
+							allowNoun = true;
+							foundCommand = true;
+						}
+						else if (d == verb && d == "inspect")
+						{
+							allowNoun = true; // continued from line 488
+							foundCommand = true;
+						}
+						else if (d == verb && d == "quit")
+						{
+							gameLoop = false;
+							foundCommand = true;
+						}
+						if (foundCommand)
+						{
+							break;
+						}
+					}
+				}
+			}
+
+			if (noun != "" && allowNoun)
+			{
+				noun = NormaliseString(noun);
+				if (verb == "take")
+				{
+					for (Item* ite : player->location->GetContents())
+					{
+						std::string tempIte = NormaliseString(ite->GetName());
+						if (tempIte == noun)
+						{
+							player->TakeItem(ite);
+							break;
+						}
+					}
+				}
+				else if (verb == "drop")
+				{
+					player->DropItem(SearchInventory(noun, player));
+				}
+				else if (verb == "open")
+				{
+					//NOT IMPLEMENTED YET will use Search Inventory
+					std::cout << "not implemented yet";
+				}
+				else if (verb == "inspect")
+				{
+					SearchInventory(noun, player)->GetDescription();
+				}
+			}
+
+			
 
 		}
 		

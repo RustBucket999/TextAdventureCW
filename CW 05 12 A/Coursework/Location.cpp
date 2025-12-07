@@ -107,7 +107,12 @@ std::vector<std::string> Location::GetDirectionNames()
 	return directionNames;
 }
 
-std::vector<Item*> Location::GetContents()
+std::map<std::string, Location*> Location::GetDirections()
+{
+	return directions;
+}
+
+std::list<Item*> Location::GetContents()
 {
 	return contents;
 }
@@ -134,5 +139,12 @@ void Location::AddItem(Item* item)
 
 void Location::RemoveItem(Item* item)
 {
-
+	for (Item* ite : contents)
+	{
+		if (ite == item)
+		{
+			contents.remove(ite);
+			break;
+		}
+	}
 }

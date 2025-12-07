@@ -8,18 +8,21 @@
 class Player
 {
 public:
-	Player();
+	Player(Inventory* inv);
 	~Player();
 private:
-	//std::string location;
 	Inventory* inventory;
-	Location* location;
 	int steps;
 public:
+	Inventory* GetInventory();
 	bool HasItem(Item* i);
 	bool TakeItem(Item* i);
 	bool DropItem(Item* i);
 	bool OpenItem(Item* i);
+	void SetLocation(Location* l);
 	void PrintStatus();
+	bool PlayerMove(Location* t);
+public:
+	Location* location;
 };
 

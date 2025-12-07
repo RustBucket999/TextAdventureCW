@@ -1,9 +1,9 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player()
+Player::Player(Inventory* inv)
 {
-    Inventory* inventory = new Inventory();
+    inventory = inv;
 }
 
 Player::~Player()
@@ -22,11 +22,14 @@ bool Player::HasItem(Item* i)
 
 bool Player::TakeItem(Item* i)
 {
-    if (HasItem(i))
+    for (Item* item : location->GetContents())
     {
-        location->RemoveItem(i);
-        inventory->AddItem(i);
-        return true;
+        if (item = i)
+        {
+            location->RemoveItem(i);
+            inventory->AddItem(i);
+            return true;
+        }
     }
     return false;
 }
@@ -47,6 +50,11 @@ bool Player::OpenItem(Item* i)
     return false;
 }
 
+void Player::SetLocation(Location* l)
+{
+    location = l;
+}
+
 void Player::PrintStatus()
 {
     std::cout << "Status :" << "\n";
@@ -55,4 +63,17 @@ void Player::PrintStatus()
     //std::cout << inventory->ReadInventory(); Implement Inventory later
     std::cout << "Current Location: " << location->GetName() << "\n";
     
+}
+
+bool Player::PlayerMove(Location* t)
+{
+    location = t;
+    steps++;
+    return (true);
+    return false;
+}
+
+Inventory* Player::GetInventory()
+{
+    return inventory;
 }
