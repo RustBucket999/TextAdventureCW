@@ -23,8 +23,6 @@ std::string FindLocation(int number) // Check the file for formatting.
 		return 0;
 	}
 
-	//size_t location = line.rfind("HP:100");
-
 	while (std::getline(StatsFile, line)) // Search until you find the correct section, then store everything in memory until a blank
 	{
 		if (line == target)
@@ -43,18 +41,98 @@ std::string FindLocation(int number) // Check the file for formatting.
 	}
 	StatsFile.close();
 	return output;
-	//while (std::getline(StatsFile, line))
-	//{
-	//	if (location != std::string::npos)
-	//	{
-	//		std::cout << line.substr(location + std::string("Location:").size());
-	//	}
-	//	else 
-	//	{
-	//		std::cout << "Bug";
-	//	}
-	//}
+}
 
+void FindConnections(std::string str, Location* loc, std::vector<Location*> lMap)
+{
+	str = str.substr(str.find("Name:"));
+	str = str.substr(0, str.find("Location: "));
+	std::vector<std::string> directionList = { "NORTH", "SOUTH", "WEST", "EAST", "IN", "OUT", "UP", "DOWN" };
+
+
+	std::string line;
+	std::string target = "";
+	std::string direction = "";
+	int locationID = -1; // A number out of range, NULL just sets it to 0
+	std::string key = "";
+	std::string tempTarget = "";
+
+	bool directionSeparated = false;
+	bool stitchingConnections = true;
+
+	while (stitchingConnections)
+	{
+		for (std::string dir : directionList) // for each entry in direction list // If NORTH is first in directionList but not in stats file, then it will skip everything before that. Need strict direction order.
+		{
+			if (str.find(dir) != std::string::npos)
+			{
+				target = str.substr(str.find(dir));
+				break;
+			}
+			if (dir == directionList.back())
+			{
+				stitchingConnections = false;
+			}
+		}
+
+		if (!stitchingConnections)
+		{
+			break;
+		}
+		// filter out the target
+		for (auto& a : target)
+		{
+			if (a != '\n')
+			{
+				tempTarget += a;
+			}
+			else
+			{
+				target = tempTarget;
+				tempTarget = "";
+				break;
+			}
+		}
+		directionSeparated = false;
+		//split between direction, ID, Key
+		for (auto& a : target)
+		{
+			tempTarget += a;
+			if (a != '\n' && a != ',' && !directionSeparated)
+			{
+				if (!directionSeparated && a == ' ')
+				{
+					directionSeparated = true;
+					direction = tempTarget;
+					tempTarget = "";
+					continue;
+				}
+			}
+			else if (locationID < 0)
+			{
+				locationID = std::stoi(tempTarget);
+				tempTarget = "";
+			}
+			if (a == '\n') // The key has an extra space before it need to fix, also this never gets set in the last loop because it never raches \n
+			{
+				key = tempTarget;
+				tempTarget = "";
+			}
+
+		}
+
+		loc->AddDirection(direction, lMap[locationID - 1]);
+		target = "";
+		tempTarget = "";
+		locationID = -1;
+
+		if (str.find(direction) + 1 != str.npos)
+		{
+			str = str.substr(str.find(direction) + 1);
+		}
+		
+
+	}
 
 }
 
@@ -82,7 +160,6 @@ std::string FindItem(std::string itemName)
 		}
 		if (hasFound == true)
 		{
-			//std::cout << line << "\n";
 			output += line + "\n";
 		}
 	}
@@ -123,6 +200,18 @@ Location* CreateLocation(int id)
 {
 	Location* location = new Location(FindLocation(id));
 	return location;
+}
+
+Location* FindLocationInMap(int id, std::vector<Location*> locMap)
+{
+	for (Location* loc : locMap)
+	{
+		if (loc->GetID() == id)
+		{
+			return loc;
+		}
+	}
+	return nullptr;
 }
 
 std::string NormaliseString(std::string victim)
@@ -220,6 +309,9 @@ int main()
 	int locationID = 1;
 	bool foundLastLocation = false;
 	bool foundLastItem = false;
+
+	bool stitchingLocation = false;
+
 	bool createdLastLocation = false;
 	bool createdLastItem = false;
 	bool formattingItem = false;
@@ -227,8 +319,12 @@ int main()
 	std::string contentData = "";
 	std::string itemData = "";
 
+	std::string directionName = "";
+	std::string tempDirection = "";
 	std::vector <Item*> itemList;
+
 	int count = locationMap.size() - 1;
+	int IDcount = 0;
 
 	Inventory* inventory = new Inventory();
 	Player* player = new Player(inventory);
@@ -252,33 +348,55 @@ int main()
 		if (locationID > 1 && foundLastLocation == true)
 		{
 			
-			// creatingGame = false;
 			// For loop where you create the locations, moving backwards.
 			for (int i = 1; i < locationID; i++)
 			{
 				Location* tempLocation = CreateLocation(i);
 				locationMap.push_back(tempLocation);
 			}
-			//locationID--;
-			int count = locationMap.size();
-			for (int i = 0; i < count; i++) // CURRENTLY LOCATIONS ARE JUST A STRAIGHT LINE
-			{
-				if (i > 0)
-				{
-					locationMap[i]->AddDirection("south", locationMap[i- 1]);
-				}
-				if (i + 1 < count)
-				{
-					locationMap[i]->AddDirection("north", locationMap[i + 1]);
-				}
-			}
-
 			createdLastLocation = true;
 			player->SetLocation(locationMap[0]);
 			
 		}
+
 		if (createdLastLocation)
 		{
+
+			//Stitch the locations together.
+			for (Location* loc : locationMap)
+			{
+				stitchingLocation = true;
+				locationData = FindLocation(loc->GetID()+1);
+				FindConnections(locationData, loc, locationMap);
+				//FindConnections(loc->GetID()+1); // Delete this later
+				//FindLocationInMap() // dont forget about this function
+				//while (stitchingLocation)
+				//{
+				//	directionName = locationData.substr(0);
+				//	for (auto& n : directionName) // Remove everything after end of line
+				//	{
+				//		if (n != '\n') // Add everything until end of line
+				//		{
+				//			tempDirection += n;
+				//		}
+				//		else // Get the direction line, then remove it from the locationData stored to ensure no doubling.
+				//		{
+				//			directionName = tempDirection;
+				//			tempDirection = "";
+				//			locationData = locationData.substr(directionName.length() + 1);
+				//			break;
+				//		}
+				//	}
+				//	// loc.Adddirection( NORTH, loc2)
+				//}
+				for (std::string i : loc->GetDirectionNames())
+				{
+					std::cout << "CONNECTION MADE THIS LOOP " << i << "\n";
+					std::cout << loc->GetName() <<" CONNECTS TO: " << loc->GetDirections()[i]->GetName() << "\n";
+				}
+	
+			}
+
 			// Create Items
 			if (foundLastItem != true)
 			{
@@ -370,7 +488,6 @@ int main()
 							} 
 							if (b == ',' || b == '\n' || charCount == contentData.length())
 							{
-								//std::cout << charCount << "charCount" << "\n";
 								
 								actualItemName = tempContentData;
 								std::cout << "content data: " << contentData.length() << "\n";

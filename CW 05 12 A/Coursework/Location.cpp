@@ -123,6 +123,10 @@ void Location::AddDirection(std::string direction, Location* location)
 	{
 		directionNames.push_back(direction);
 		directions[direction] = location;
+
+		std::cout << "Direction added: " << direction << std::endl;
+		std::cout << "Location assigned (address): " << location->GetName() << std::endl;
+
 	}
 	else 
 	{
