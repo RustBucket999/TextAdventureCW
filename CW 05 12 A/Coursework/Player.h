@@ -21,7 +21,7 @@ public:
 	bool OpenItem(Item* i);
 	void SetLocation(Location* l);
 	void PrintStatus();
-	bool PlayerMove(Location* t);
+	bool PlayerMove(Location* t, std::string dir);
 public:
 	Location* location;
 };

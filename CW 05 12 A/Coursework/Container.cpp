@@ -1,6 +1,6 @@
 #include "Container.h"
 
-Container::Container(std::string a, std::string b)
+Container::Container()
 {
 
 }
@@ -11,9 +11,20 @@ Container::~Container()
 
 bool Container::Open()
 {
-	if (true) //check wether key in inventory
+}
+
+void Container::AddItem(Item* item)
+{
+	contents.push_back(item);
+}
+
+void Container::RemoveItem(Item* item)
+{
+	for (Item* i : contents)
 	{
-		return true;
+		if (i == item)
+		{
+			contents.remove(i);
+		}
 	}
-	else return false;
 }

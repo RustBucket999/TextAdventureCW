@@ -25,8 +25,8 @@ Description: Ye old knucklebones. He likes to go 'doot doot' at the bars on wedn
 Item: Cake
 Description: Do not believe it.
 
-Item: Ghost
-Description: AAAAAAAAAAAAAAAAAAAAAAAAAAA!
+Item: Axe
+Description: "Let me Axe you a question". It's still sharp.
 
 
 Location: 1
@@ -47,10 +47,10 @@ SOUTH 1
 OUT 1
 
 Location: 3
-Name: Bathroom
-Description: You are in a bathroom. There is a sink with a cupboard, a toilet with no paper, and a bathtub with depression.
-Contents: 
-EAST 2
+Name: Clearing In The Forest
+Description: You've found a small clearing to the side of the forest. There's an axe here left unattended.
+Contents: Axe
+EAST 1
 
 Location: 4
 Name: Kitchen
@@ -60,6 +60,12 @@ SOUTH 2
 WEST 5
 
 Location: 5
+Name: Bathroom
+Description: You are in a bathroom. There is a sink with a cupboard, a toilet with no paper, and a bathtub with depression.
+Contents: 
+EAST 2
+
+Location: 6
 Name: Basement
 Description: You are inside the Basement. There is a closet with skeletons inside it.
 Contents: Skeleton, Ghost

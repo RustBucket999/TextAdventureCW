@@ -8,6 +8,14 @@
 #include "Location.h"
 
 
+std::string NormaliseString(std::string victim)
+{
+	for (auto& v : victim)
+	{
+		v = std::tolower(v);
+	}
+	return victim;
+}
 
 std::string FindLocation(int number) // Check the file for formatting.
 {
@@ -43,7 +51,7 @@ std::string FindLocation(int number) // Check the file for formatting.
 	return output;
 }
 
-void FindConnections(std::string str, Location* loc, std::vector<Location*> lMap)
+void FindConnections(std::string str, Location* loc, std::vector<Location*> lMap, std::vector<Item*> iList)
 {
 	str = str.substr(str.find("Name:"));
 	str = str.substr(0, str.find("Location: "));
@@ -55,7 +63,9 @@ void FindConnections(std::string str, Location* loc, std::vector<Location*> lMap
 	std::string direction = "";
 	int locationID = -1; // A number out of range, NULL just sets it to 0
 	std::string key = "";
+	Item* keyItem = nullptr;
 	std::string tempTarget = "";
+	int count = 0;
 
 	bool directionSeparated = false;
 	bool stitchingConnections = true;
@@ -80,7 +90,7 @@ void FindConnections(std::string str, Location* loc, std::vector<Location*> lMap
 			break;
 		}
 		// filter out the target
-		for (auto& a : target)
+		for (auto& a : target) //I realised later this could be a function
 		{
 			if (a != '\n')
 			{
@@ -97,7 +107,12 @@ void FindConnections(std::string str, Location* loc, std::vector<Location*> lMap
 		//split between direction, ID, Key
 		for (auto& a : target)
 		{
-			tempTarget += a;
+			count++; // this is to fix a bug with the key in which it skips setting a key due to it never reaching a \n if its the last direction
+			if (a != ' ' || directionSeparated) 
+			{
+				tempTarget += a;
+			}
+			
 			if (a != '\n' && a != ',' && !directionSeparated)
 			{
 				if (!directionSeparated && a == ' ')
@@ -113,23 +128,48 @@ void FindConnections(std::string str, Location* loc, std::vector<Location*> lMap
 				locationID = std::stoi(tempTarget);
 				tempTarget = "";
 			}
-			if (a == '\n') // The key has an extra space before it need to fix, also this never gets set in the last loop because it never raches \n
+			if (tempTarget == ", ")
+			{
+				tempTarget = ""; // tempTarget when trying to store the key into memory also stores ", ", and this gets rid of that since its unnecessary and buggy.
+				//I do think there are far cleaner and nicer ways of handling it, but I think that's something to do later.
+			}
+			if (a == '\n' || count == target.length()) 
 			{
 				key = tempTarget;
 				tempTarget = "";
+				if (key != "")
+				{
+					for (Item* i : iList)
+					{
+						if (i->GetName() == key)
+						{
+							keyItem = i;
+							break;
+						}
+					}
+				}
+				else
+				{
+					keyItem = nullptr;
+				}
 			}
 
 		}
 
-		loc->AddDirection(direction, lMap[locationID - 1]);
+		if (str.find(direction) + 2 != str.npos)
+		{
+			str = str.substr(str.find(direction) + 2); // this is to damage the direction we've already formatted, so it can't be found again
+		}
+
+		direction = NormaliseString(direction);
+		loc->AddDirection(direction, lMap[locationID - 1], keyItem);
 		target = "";
 		tempTarget = "";
+		key = "";
+		keyItem = nullptr;
 		locationID = -1;
 
-		if (str.find(direction) + 1 != str.npos)
-		{
-			str = str.substr(str.find(direction) + 1);
-		}
+
 		
 
 	}
@@ -214,14 +254,6 @@ Location* FindLocationInMap(int id, std::vector<Location*> locMap)
 	return nullptr;
 }
 
-std::string NormaliseString(std::string victim)
-{
-	for (auto& v : victim)
-	{
-		v = std::tolower(v);
-	}
-	return victim;
-}
 Item* SearchInventory(std::string itemName, Player* p)
 {
 	for (Item* ite : p->GetInventory()->GetInventory())
@@ -282,7 +314,7 @@ int main()
 	bool creatingGame = true;
 	std::vector<Location*> locationMap;
 	unfilteredItem = FindItem("Screwdriver");
-
+	 // delete this section later
 
 	//std::cout << unfilteredItem;
 
@@ -333,7 +365,7 @@ int main()
 	// Create Locations
 		if (foundLastLocation != true)
 		{
-			 locationData = FindLocation(locationID);
+			 locationData = FindLocation(locationID); //this could probably be easier AND faster with rfind instead of find :)
 		}
 		if (locationData != "")
 		{
@@ -348,7 +380,7 @@ int main()
 		if (locationID > 1 && foundLastLocation == true)
 		{
 			
-			// For loop where you create the locations, moving backwards.
+			// For loop where you create the locations,
 			for (int i = 1; i < locationID; i++)
 			{
 				Location* tempLocation = CreateLocation(i);
@@ -361,41 +393,6 @@ int main()
 
 		if (createdLastLocation)
 		{
-
-			//Stitch the locations together.
-			for (Location* loc : locationMap)
-			{
-				stitchingLocation = true;
-				locationData = FindLocation(loc->GetID()+1);
-				FindConnections(locationData, loc, locationMap);
-				//FindConnections(loc->GetID()+1); // Delete this later
-				//FindLocationInMap() // dont forget about this function
-				//while (stitchingLocation)
-				//{
-				//	directionName = locationData.substr(0);
-				//	for (auto& n : directionName) // Remove everything after end of line
-				//	{
-				//		if (n != '\n') // Add everything until end of line
-				//		{
-				//			tempDirection += n;
-				//		}
-				//		else // Get the direction line, then remove it from the locationData stored to ensure no doubling.
-				//		{
-				//			directionName = tempDirection;
-				//			tempDirection = "";
-				//			locationData = locationData.substr(directionName.length() + 1);
-				//			break;
-				//		}
-				//	}
-				//	// loc.Adddirection( NORTH, loc2)
-				//}
-				for (std::string i : loc->GetDirectionNames())
-				{
-					std::cout << "CONNECTION MADE THIS LOOP " << i << "\n";
-					std::cout << loc->GetName() <<" CONNECTS TO: " << loc->GetDirections()[i]->GetName() << "\n";
-				}
-	
-			}
 
 			// Create Items
 			if (foundLastItem != true)
@@ -437,16 +434,21 @@ int main()
 						}
 					}
 					itemList.push_back(CreateItem(itemName, itemDesc));
+					if (itemName == "Letter")
+					{
+						player->GetInventory()->AddItem(itemList.back());
+					}
 					if (itemData == "" && AllDesc == "")
 					{
 						formattingItem = false;
 					}
 				}
+				
 			}
 			std::string tempContentData;
 			std::string actualItemName;
 			int charCount = 0;
-			for (int i = 1; i < locationID; i++)
+			for (int i = 1; i < locationID; i++) //make sure no item exists both on the floor and in a container
 			{ // Places the items in their respective locations
 
 				locationData = FindLocation(i);
@@ -490,7 +492,7 @@ int main()
 							{
 								
 								actualItemName = tempContentData;
-								std::cout << "content data: " << contentData.length() << "\n";
+								//std::cout << "content data: " << contentData.length() << "\n";
 								tempContentData = "";
 								// Actually add the items to the location.
 
@@ -511,13 +513,29 @@ int main()
 				}
 				std::cout << "finished LOOP: " << i << "\n";
 			}
+
+			//Stitch the locations together.
+			for (Location* loc : locationMap)
+			{
+				stitchingLocation = true;
+				locationData = FindLocation(loc->GetID() + 1);
+				FindConnections(locationData, loc, locationMap, itemList);
+
+				for (std::string i : loc->GetDirectionNames())
+				{
+					std::cout << "CONNECTION MADE THIS LOOP " << i << "\n";
+					std::cout << loc->GetName() << " CONNECTS TO: " << loc->GetDirections()[i]->GetName() << "\n";
+				}
+
+			}
+
 			creatingGame = false;
 		}
 	
 	}
 
 	
-	std::vector<std::string> verbList = {"north", "south", "west", "east", "in", "out", "up", "down", "take", "help", "drop", "open", "quit", "look"};
+	std::vector<std::string> verbList = {"north", "south", "west", "east", "in", "out", "up", "down", "take", "help", "drop", "open", "quit", "look", "inventory"};
 	std::vector<std::string> nounList = {};
 
 	for (Item* item : itemList)
@@ -595,10 +613,18 @@ int main()
 						std::cout << "success!" << "\n";
 						for (std::string dir : player->location->GetDirectionNames())
 						{
+							dir = NormaliseString(dir);
 							if (dir == verb)
 							{
-								player->PlayerMove(player->location->GetDirections()[verb]);
-								Look(player);
+								if (player->PlayerMove(player->location->GetDirections()[verb], dir))
+								{
+									player->PlayerMove(player->location->GetDirections()[verb], dir);
+									Look(player); //this is so that you only look around if you reach a new location
+								}
+								else player->PlayerMove(player->location->GetDirections()[verb], dir); 
+
+
+
 								foundCommand = true;
 								break;
 							}
@@ -622,13 +648,12 @@ int main()
 						}
 						else if ((d == verb && d == "take") || (d == verb && d == "drop"))
 						{
-							allowNoun = true; // continued from line 488
+							allowNoun = true; // continued from line 668
 							foundCommand = true;
 						}
 						else if (d == verb && d == "look")
 						{
 							Look(player);
-
 							foundCommand = true;
 						}
 						else if (d == verb && d == "open")
@@ -639,7 +664,12 @@ int main()
 						}
 						else if (d == verb && d == "inspect")
 						{
-							allowNoun = true; // continued from line 488
+							allowNoun = true; // continued from line 689
+							foundCommand = true;
+						}
+						else if (d == verb && d == "inventory")
+						{
+							player->GetInventory()->ReadInventory();
 							foundCommand = true;
 						}
 						else if (d == verb && d == "quit")
@@ -647,11 +677,18 @@ int main()
 							gameLoop = false;
 							foundCommand = true;
 						}
+						else
+						{
+							std::cout << "Invalid Command!" << '\n';
+							continue;
+						}
 						if (foundCommand)
 						{
 							break;
 						}
 					}
+
+						
 				}
 			}
 
@@ -682,6 +719,11 @@ int main()
 				else if (verb == "inspect")
 				{
 					SearchInventory(noun, player)->GetDescription();
+				}
+				else
+				{
+					std::cout << "Invalid object!" << "\n";
+					continue;
 				}
 			}
 

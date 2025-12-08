@@ -40,7 +40,7 @@ void Inventory::ReadInventory()
 {
 	for (Item* item : inventory)
 	{
-		std::cout << "--" << item << "\n";
+		std::cout << "--" << item->GetName() << "\n";
 	}
 }
 

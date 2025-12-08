@@ -60,17 +60,36 @@ void Player::PrintStatus()
     std::cout << "Status :" << "\n";
     std::cout << "-------------------------------------------";
     std::cout << "Steps Taken: " << steps << "\n";
-    //std::cout << inventory->ReadInventory(); Implement Inventory later
+    GetInventory()->ReadInventory();
     std::cout << "Current Location: " << location->GetName() << "\n";
     
 }
 
-bool Player::PlayerMove(Location* t)
+bool Player::PlayerMove(Location* t, std::string dir)
 {
-    location = t;
-    steps++;
-    return (true);
-    return false;
+    // check wether you have the correct item, and the direction is not locked
+
+    if (location->GetLockedPaths().size() != 0)
+    {
+        if (HasItem(location->GetLockedPaths()[dir]))
+        {
+            location = t;
+            steps++;
+        }
+        else
+        {
+            std::cout << "That way seems to be locked, maybe an item can help?" << "\n" << "Hint: you have not picked the item up yet." << "\n";
+            return false;
+        }
+    }
+    else
+    {
+        location = t;
+        steps++;
+        return (true);
+    }
+
+
 }
 
 Inventory* Player::GetInventory()

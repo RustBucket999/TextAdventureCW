@@ -112,20 +112,34 @@ std::map<std::string, Location*> Location::GetDirections()
 	return directions;
 }
 
+std::map<std::string, Item*> Location::GetLockedPaths()
+{
+	return lockedPaths;
+}
+
 std::list<Item*> Location::GetContents()
 {
 	return contents;
 }
 
-void Location::AddDirection(std::string direction, Location* location)
+void Location::AddDirection(std::string direction, Location* location, Item* doorKey)
 {
 	if (location != nullptr)
 	{
 		directionNames.push_back(direction);
 		directions[direction] = location;
+		if (doorKey != nullptr)
+		{
+			lockedPaths[direction] = doorKey;
+		}
 
 		std::cout << "Direction added: " << direction << std::endl;
-		std::cout << "Location assigned (address): " << location->GetName() << std::endl;
+		std::cout << "Location assigned : " << location->GetName() << std::endl;
+		if (doorKey != nullptr)
+		{
+			std::cout << "Door locked with : " << doorKey->GetName() << std::endl;
+		}
+
 
 	}
 	else 
