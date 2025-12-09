@@ -11,17 +11,27 @@ Inventory::~Inventory()
 
 Item* Inventory::GetItem(std::string i)
 {
+	std::string lowerCase = "";
+	for (auto& a : i)
+	{
+		a = tolower(a);
+	}
 	for (Item* item : inventory)
 	{
-		if (item->GetName() == i)
+		for (auto& a : item->GetName())
+		{
+			lowerCase += tolower(a);
+		}
+		if (lowerCase == i)
 		{
 			return item;
 		}
+		lowerCase = "";
 	}
 	return nullptr;
 }
 
-std::list<Item*> Inventory::GetInventory()
+std::list<Item*>& Inventory::GetInventory()
 {
 	return inventory;
 }

@@ -71,16 +71,26 @@ bool Player::PlayerMove(Location* t, std::string dir)
 
     if (location->GetLockedPaths().size() != 0)
     {
-        if (HasItem(location->GetLockedPaths()[dir]) || location->GetLockedPaths()[dir] == nullptr)
+        if (location->GetLockedPaths()[dir] != nullptr)
         {
-            location = t;
-            steps++;
+            if (HasItem(location->GetLockedPaths()[dir]) || location->GetLockedPaths()[dir] == nullptr)
+            {
+                location = t;
+                steps++;
+            }
+            else
+            {
+                std::cout << "That way seems to be locked, maybe an item can help?" << "\n" << "Hint: you have not picked the item up yet." << "\n";
+                return false;
+            }
         }
         else
         {
-            std::cout << "That way seems to be locked, maybe an item can help?" << "\n" << "Hint: you have not picked the item up yet." << "\n";
-            return false;
+            location = t;
+            steps++;
+            return (true);
         }
+
     }
     else
     {

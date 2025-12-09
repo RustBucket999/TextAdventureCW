@@ -7,23 +7,28 @@ Description: A sturdy box. It has seen better times.
 Contents: Red Key, Letter
 Keys: Screwdriver
 
+Item: Cake
+Description: Do not believe it.
+Contents: Basement Key
+Keys: Axe
+
 Item: Screwdriver
 Description: A flathead screwdriver. Useful for prying things open.
 
 Item: Red Key
 Description: A small red key. It looks like it could open a door.
 
+Item: Basement Key
+Description: It's nearly rusted away!
+
 Item: Rubber Duck
-Description: It squeeks when you squeeze!
+Description: It squeeks when you squeaze!
 
 Item: Letter
 Description: A handwritten letter. It reads: "Meet me in the basement. -X"
 
 Item: Skeleton
 Description: Ye old knucklebones. He likes to go 'doot doot' at the bars on wednesdays. Has been losing weight.
-
-Item: Cake
-Description: Do not believe it.
 
 Item: Axe
 Description: "Let me Axe you a question". It's still sharp.
@@ -44,7 +49,9 @@ Contents: Rubber Duck
 Enemy: Bear, 150, 20, 5
 NORTH 4
 SOUTH 1
+EAST 5
 OUT 1
+DOWN 6, Basement Key
 
 Location: 3
 Name: Clearing In The Forest
@@ -63,11 +70,12 @@ Location: 5
 Name: Bathroom
 Description: You are in a bathroom. There is a sink with a cupboard, a toilet with no paper, and a bathtub with depression.
 Contents: 
-EAST 2
+EAST 4
+WEST 2
 
 Location: 6
 Name: Basement
 Description: You are inside the Basement. There is a closet with skeletons inside it.
-Contents: Skeleton, Ghost
+Contents: Skeleton
 EAST 4
 

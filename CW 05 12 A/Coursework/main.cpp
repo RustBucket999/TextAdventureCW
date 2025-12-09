@@ -243,16 +243,16 @@ Item* CreateItem(std::string a, std::string b, std::vector<std::string> containe
 	if (isContainer)
 	{
 		Container* newItem = new Container(a, b);
-		std::cout << "Item Name: " << newItem->GetName() << std::endl;
-		std::cout << "Item Description: " << newItem->GetDescription() << std::endl;
+		//std::cout << "Item Name: " << newItem->GetName() << std::endl;
+		//std::cout << "Item Description: " << newItem->GetDescription() << std::endl;
 		return newItem;
 	}
 	else 
 	{
 		Item* newItem = new Item(a, b);
 
-		std::cout << "Item Name: " << newItem->GetName() << std::endl;
-		std::cout << "Item Description: " << newItem->GetDescription() << std::endl;
+		//std::cout << "Item Name: " << newItem->GetName() << std::endl;
+		//std::cout << "Item Description: " << newItem->GetDescription() << std::endl;
 		return newItem;
 	}
 
@@ -318,7 +318,6 @@ int main()
 	std::string line;
 	std::string output;
 	std::string playerInput;
-	std::string unfilteredItem;
 	std::string itemDescription;
 	std::string itemName;
 	std::string itemDesc;
@@ -331,17 +330,7 @@ int main()
 	bool creatingGame = true;
 	std::vector<Location*> locationMap;
 	std::vector<std::string> containers{"Strongbox", "Cake"}; // I wish I could think of a quick way to detect each container within the file without heavily changing the file
-	std::vector<std::string> keys{ "Red Key", "Knife" };
-	unfilteredItem = FindItem("Screwdriver");
-	// delete this section later
-
-	//std::cout << unfilteredItem;
-
-	itemName = unfilteredItem.substr(unfilteredItem.find("Item: "));
-	itemName = itemName.substr(6);
-
-	itemDesc = unfilteredItem.substr(unfilteredItem.find("Description: "));
-	itemDesc = itemDesc.substr(13);
+	std::vector<std::string> keys{ "Red Key", "Axe", "Screwdriver"};
 
 	for (auto& t : itemName)
 	{
@@ -393,13 +382,13 @@ int main()
 		}
 		if (locationData != "")
 		{
-			std::cout << "Found Location : " << locationID << "\n";
+			//std::cout << "Found Location : " << locationID << "\n";
 			locationID++;
 		}
 		else
 		{
 			foundLastLocation = true;
-			std::cout << "No more locations to create." << "\n";
+			//std::cout << "No more locations to create." << "\n";
 		}
 		if (locationID > 1 && foundLastLocation == true)
 		{
@@ -464,19 +453,29 @@ int main()
 						AllDesc = AllDesc.substr(10);
 						for (auto& n : AllDesc)
 						{
-							if (n != ',') // Again I really think if I had more time to spend I could make this one function
+							if (n != ',' && n != '\n') // Again I really think if I had more time to spend I could make this one function
 							{
-								if (n != ' ' && tempItem != "")
+								if (n == ' ')
+								{
+									if (tempItem != "" )
+									{
+										tempItem += n;
+									}
+									
+								}
+								else
 								{
 									tempItem += n;
 								}
 							}
-							else //new std::vector<std::string> = 
+							else 
 							{
-								tempContainerInsides.push_back(tempItem);
-								containerToInsides[itemName] = tempContainerInsides;
-								tempContainerInsides.clear();
+								containerToInsides[itemName].push_back(tempItem);
 								tempItem = "";
+								if (n == '\n')
+								{
+									break;
+								}
 							}
 						}
 						//Store the keys
@@ -484,12 +483,17 @@ int main()
 						AllDesc = AllDesc.substr(6);
 						for (auto& n : AllDesc)
 						{
-							if (n != ',')
+							if (n != ',' && n != '\n')
 							{
-								if (n != ' ' && tempItem != "")
+								if (n == ' ')
 								{
-									tempItem += n;
+									if (tempItem != "")
+									{
+										tempItem += n;
+									}
+
 								}
+								else tempItem += n;
 							}
 							else
 							{
@@ -501,10 +505,6 @@ int main()
 					}
 
 					itemList.push_back(CreateItem(itemName, itemDesc, containers));
-					if (itemName == "Letter")
-					{
-						player->GetInventory()->AddItem(itemList.back());
-					}
 					if (itemData == "" && AllDesc == "")
 					{
 						formattingItem = false;
@@ -608,7 +608,7 @@ int main()
 						break;
 					}
 				}
-				std::cout << "finished LOOP: " << i << "\n";
+				////std::cout << "finished LOOP: " << i << "\n";
 			}
 
 
@@ -624,8 +624,8 @@ int main()
 
 				for (std::string i : loc->GetDirectionNames())
 				{
-					std::cout << "CONNECTION MADE THIS LOOP " << i << "\n";
-					std::cout << loc->GetName() << " CONNECTS TO: " << loc->GetDirections()[i]->GetName() << "\n";
+					//std::cout << "CONNECTION MADE THIS LOOP " << i << "\n";
+					//std::cout << loc->GetName() << " CONNECTS TO: " << loc->GetDirections()[i]->GetName() << "\n";
 				}
 
 			}
@@ -636,7 +636,7 @@ int main()
 	}
 
 	
-	std::vector<std::string> verbList = {"north", "south", "west", "east", "in", "out", "up", "down", "take", "help", "drop", "open", "quit", "look", "inventory", "status"};
+	std::vector<std::string> verbList = {"north", "south", "west", "east", "in", "out", "up", "down", "take", "help", "drop", "open", "quit", "look", "inventory", "status", "inspect"};
 
 	std::cout << "Welcome to the game, type 'start' to proceed. Type 'exit' to quit. After beginning play, type 'help' for help." << "\n";
 	while (gameLoop)
@@ -705,7 +705,7 @@ int main()
 				{
 					if (d == verb)
 					{
-						std::cout << "success!" << "\n";
+						//std::cout << "success!" << "\n";
 						for (std::string dir : player->location->GetDirectionNames())
 						{
 							dir = NormaliseString(dir);
@@ -734,7 +734,7 @@ int main()
 							std::cout << "To pick up or drop items, write 'Take/Drop [OBJECT NAME]'. Example below" << "\n";
 							std::cout << "\n" << "Take Screwdriver" << "\n" << "\n";
 							std::cout << "To open containers you need to first pick them out, then if you have the key in your inventory you can open them like the example bellow." << "\n";
-							//std::cout << "\n" << "Open Strongbox" << "\n" << "\n"; MAKE SURE THIS IS ACCURATE WHEN IT IS IMPLEMENTED
+							std::cout << "\n" << "Open Strongbox" << "\n" << "\n";
 							std::cout << "Similarly, you can inspect items in your inventory to get a description of them." << "\n";
 
 							foundCommand = true;
@@ -756,30 +756,29 @@ int main()
 							allowNoun = true;
 							foundCommand = true;
 						}
-						else if (  d == "inspect")
+						else if ( d == "inspect")
 						{
 							allowNoun = true; // continued from line 794
 							foundCommand = true;
 						}
-						else if (  d == "inventory")
+						else if ( d == "inventory")
 						{
 							player->GetInventory()->ReadInventory();
 							foundCommand = true;
 						}
-						else if (  d == "status")
+						else if ( d == "status")
 						{
 							player->PrintStatus();
 							foundCommand = true;
 						}
-						else if (  d == "quit")
+						else if ( d == "quit")
 						{
 							gameLoop = false;
 							foundCommand = true;
 						}
-						else
+						if (!foundCommand)
 						{
 							std::cout << "Invalid Command!" << '\n';
-							continue;
 						}
 						if (foundCommand)
 						{
@@ -802,6 +801,13 @@ int main()
 						if (tempIte == noun)
 						{
 							player->TakeItem(ite);
+							if (ite->GetName() == "Skeleton")
+							{
+								std::cout << "YOU FOUND ME! the skeleton cheers in a nasal voice. Ironic since it has no nose." << "\n";
+								std::cout << "You rescue X the skeleton from the closet he was trapped in, and go on plenty of adventures together!" << "\n";
+								std::cout << "\n\n\n\n" << "THE END" << "\n";
+								gameLoop = false;
+							}
 							break;
 						}
 					}
@@ -812,21 +818,28 @@ int main()
 				}
 				else if (verb == "open")
 				{
-					if (inventory->GetItem(noun)->TryOpen())
+					if (player->GetInventory()->GetItem(noun) != nullptr)
 					{
-						Item* container = inventory->GetItem(noun); // store the container
-						Item* key = inventory->GetItem(noun)->GetKey(); // store its key
-						if (inventory->GetItem(key->GetName()))
+						if (player->GetInventory()->GetItem(noun)->TryOpen())
 						{
-							//container-> FINISH OPENING AND MAP PLSSS
+							Item* container = player->GetInventory()->GetItem(noun); // store the container
+							Item* key = player->GetInventory()->GetItem(noun)->GetKey(); // store its key
+							if (player->GetInventory()->GetItem(key->GetName()))
+							{
+								//move everything from container to inventory
+								std::list<Item*>& playerItems = player->GetInventory()->GetInventory();
+								std::list<Item*> containerItems = container->GetContents();
+								playerItems.splice(playerItems.end(), containerItems);
+								container->GetContents().clear(); // clear container
+							}
 						}
+
 					}
 					
-					//player->GetInventory()->GetItem(noun)->TryOpen(player->GetInventory());//try opening with items inside the same inventory
 				}
 				else if (verb == "inspect")
 				{
-					SearchInventory(noun, player)->GetDescription();
+					std::cout<< SearchInventory(noun, player)->GetDescription() << "\n";
 				}
 				else
 				{

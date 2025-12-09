@@ -14,7 +14,7 @@ private:
 	
 public:
 	Item* GetItem(std::string i);
-	std::list<Item*> GetInventory();
+	std::list<Item*>& GetInventory();
 	void AddItem(Item* newItem);
 	void RemoveItem(Item* i);
 	void ReadInventory();

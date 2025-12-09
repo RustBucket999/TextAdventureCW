@@ -1,2 +1,4 @@
-﻿  Location.cpp
+﻿  main.cpp
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\main.cpp(371,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\main.cpp(289,1): warning C4715: 'SearchInventory': not all control paths return a value
   Coursework.vcxproj -> D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\x64\Debug\Coursework.exe

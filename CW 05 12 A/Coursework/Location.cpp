@@ -30,18 +30,13 @@ Location::Location(std::string information)
 			description = description.substr(13);
 			detail = description;
 		}
-		else if (iteration == 3)
+		else if (iteration >= 3)
 		{
-			//contents = information.substr(information.find("Contents: "));
-			//std::cout << "Items not implemented yet." << "\n";)
-			//implemented after construction
-		}
-		else if (iteration >= 4)
-		{
-			std::cout << "Directions not implemented yet." << "\n";
+
+			//std::cout << "Directions not implemented yet." << "\n";
 			if (information == "")
 			{
-				std::cout << "End of information" << "\n";
+				//std::cout << "End of information" << "\n";
 				loop = false;
 			}
 		}
@@ -134,18 +129,18 @@ void Location::AddDirection(std::string direction, Location* location, Item* doo
 			lockedPaths[direction] = doorKey;
 		}
 
-		std::cout << "Direction added: " << direction << std::endl;
-		std::cout << "Location assigned : " << location->GetName() << std::endl;
+		//std::cout << "Direction added: " << direction << std::endl;
+		//std::cout << "Location assigned : " << location->GetName() << std::endl;
 		if (doorKey != nullptr)
 		{
-			std::cout << "Door locked with : " << doorKey->GetName() << std::endl;
+			//std::cout << "Door locked with : " << doorKey->GetName() << std::endl;
 		}
 
 
 	}
 	else 
 	{
-		std::cout << "Error No Location" << "\n";
+		//std::cout << "Error No Location" << "\n";
 	}
 
 }
