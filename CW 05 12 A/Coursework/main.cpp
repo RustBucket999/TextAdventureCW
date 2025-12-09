@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "Item.h"
+#include "Container.h"
 #include "Inventory.h"
 #include "Player.h"
 #include "Location.h"
@@ -208,6 +209,7 @@ std::string FindItem(std::string itemName)
 }
 std::string FindAllItems()
 {
+
 	std::ifstream StatsFile("Stats.txt");
 	std::string line;
 	std::string target = "Item: ";
@@ -229,12 +231,35 @@ std::string FindAllItems()
 	return output;
 }
 
-Item* CreateItem(std::string a, std::string b)
+Item* CreateItem(std::string a, std::string b, std::vector<std::string> containers)
 {
-	Item* newItem = new Item(a, b);
-	std::cout << "Item Name: " << newItem->GetName() << std::endl;
-	std::cout << "Item Description: " << newItem->GetDescription() << std::endl;
-	return newItem;
+	bool isContainer = false;
+
+	for (std::string s : containers)
+	{
+		if (s == a)
+		{
+			isContainer = true;
+			break;
+		}
+	}
+	if (isContainer)
+	{
+		Container* newItem = new Container(a, b);
+		std::cout << "Item Name: " << newItem->GetName() << std::endl;
+		std::cout << "Item Description: " << newItem->GetDescription() << std::endl;
+		return newItem;
+	}
+	else 
+	{
+		Item* newItem = new Item(a, b);
+
+		std::cout << "Item Name: " << newItem->GetName() << std::endl;
+		std::cout << "Item Description: " << newItem->GetDescription() << std::endl;
+		return newItem;
+	}
+
+	
 }
 Location* CreateLocation(int id)
 {
@@ -283,11 +308,6 @@ void Look(Player* p)
 }
 int main()
 {
-	/*
-	std::ofstream w_StatsFile("Stats.txt", std::ios::app);
-	w_StatsFile << "\nARM:15";
-	w_StatsFile.close();
-	*/
 
 	std::ifstream StatsFile("Stats.txt");
 	if (!StatsFile)
@@ -313,8 +333,10 @@ int main()
 	bool gameLoop = true;
 	bool creatingGame = true;
 	std::vector<Location*> locationMap;
+	std::vector<std::string> containers{"Strongbox", "Cake"}; // I wish I could think of a quick way to detect each container within the file without heavily changing the file
+	std::vector<std::string> keys{ "Red Key", "Knife" };
 	unfilteredItem = FindItem("Screwdriver");
-	 // delete this section later
+	// delete this section later
 
 	//std::cout << unfilteredItem;
 
@@ -338,6 +360,7 @@ int main()
 	}
 	tempItem = "";
 	
+	
 	int locationID = 1;
 	bool foundLastLocation = false;
 	bool foundLastItem = false;
@@ -354,6 +377,10 @@ int main()
 	std::string directionName = "";
 	std::string tempDirection = "";
 	std::vector <Item*> itemList;
+	std::string tempKey = "";
+	std::vector <std::string> tempContainerInsides; //just to store the names of the insides to actually add them
+	std::map <std::string, std::string> keyToContainer; // Map out which key is linked to which container to know how to lock them, and add to them.
+	std::map <std::string, std::vector<std::string>> containerToInsides; //Map out which insides belong to which container
 
 	int count = locationMap.size() - 1;
 	int IDcount = 0;
@@ -419,7 +446,8 @@ int main()
 					}
 					std::string AllDesc = FindItem(itemName);
 					AllDesc = AllDesc.substr(AllDesc.find("Description: ")); // remove everything before the first description on each loop
-					for (auto&d : AllDesc) // remove everything after end of line
+					AllDesc = AllDesc.substr(13);
+					for (auto&d : AllDesc) // remove everything after end of line. NOTE TO SELF, YOU CAN REPLACE THIS WITH A FUNCTION 
 					{
 						if (d != '\n')
 						{
@@ -433,7 +461,49 @@ int main()
 							break;
 						}
 					}
-					itemList.push_back(CreateItem(itemName, itemDesc));
+					if (AllDesc.find("Contents:") != std::string::npos) // If it's a container, store all the contents, then the key
+					{
+						AllDesc = AllDesc.substr(AllDesc.find("Contents: "));
+						AllDesc = AllDesc.substr(10);
+						for (auto& n : AllDesc)
+						{
+							if (n != ',') // Again I really think if I had more time to spend I could make this one function
+							{
+								if (n != ' ' && tempItem != "")
+								{
+									tempItem += n;
+								}
+							}
+							else //new std::vector<std::string> = 
+							{
+								tempContainerInsides.push_back(tempItem);
+								containerToInsides[itemName] = tempContainerInsides;
+								tempContainerInsides.clear();
+								tempItem = "";
+							}
+						}
+						//Store the keys
+						AllDesc = AllDesc.substr(AllDesc.find("Keys: "));
+						AllDesc = AllDesc.substr(6);
+						for (auto& n : AllDesc)
+						{
+							if (n != ',')
+							{
+								if (n != ' ' && tempItem != "")
+								{
+									tempItem += n;
+								}
+							}
+							else
+							{
+								tempKey = tempItem;
+								tempItem = "";
+							}
+						}
+						keyToContainer[tempKey] = itemName;
+					}
+
+					itemList.push_back(CreateItem(itemName, itemDesc, containers));
 					if (itemName == "Letter")
 					{
 						player->GetInventory()->AddItem(itemList.back());
@@ -442,6 +512,36 @@ int main()
 					{
 						formattingItem = false;
 					}
+				}
+
+				// Go through each item made, if any are containers, lock them up.
+				for (Item* i : itemList) // Go through each item made
+				{
+					for (std::string k : keys) // For each key name established
+					{
+						if (i->GetName() == keyToContainer[k]) //if the item made has the same name as the container associated with the key
+						{
+							tempContainerInsides = containerToInsides[keyToContainer[k]];
+							for (Item* t : itemList) // Go again through each item
+							{
+								if (t->GetName() == k) // If any of them match lock the container using them
+								{
+									i->TryLock(t);
+								}
+								
+								for (std::string n : tempContainerInsides) // for each item inside the container found
+								{
+									if (t->GetName() == n) //if the current item in the second loop has the same name
+									{
+										i->TryAddItem(t); //add the current item in the second loop to the container (the item in the first loop)
+									}
+								}
+							}
+
+							break; // immediately stop searching keys if a match is found 
+						}
+					}
+
 				}
 				
 			}
@@ -514,6 +614,10 @@ int main()
 				std::cout << "finished LOOP: " << i << "\n";
 			}
 
+
+
+
+
 			//Stitch the locations together.
 			for (Location* loc : locationMap)
 			{
@@ -535,13 +639,7 @@ int main()
 	}
 
 	
-	std::vector<std::string> verbList = {"north", "south", "west", "east", "in", "out", "up", "down", "take", "help", "drop", "open", "quit", "look", "inventory"};
-	std::vector<std::string> nounList = {};
-
-	for (Item* item : itemList)
-	{
-		nounList.push_back(NormaliseString(item->GetName()));
-	}
+	std::vector<std::string> verbList = {"north", "south", "west", "east", "in", "out", "up", "down", "take", "help", "drop", "open", "quit", "look", "inventory", "status"};
 
 	std::cout << "Welcome to the game, type 'start' to proceed. Type 'exit' to quit. After beginning play, type 'help' for help." << "\n";
 	while (gameLoop)
@@ -616,20 +714,19 @@ int main()
 							dir = NormaliseString(dir);
 							if (dir == verb)
 							{
-								if (player->PlayerMove(player->location->GetDirections()[verb], dir))
+								Location* tempCurrentLocation = player->location;
+								player->PlayerMove(player->location->GetDirections()[verb], dir); //You cannot use something like PlayerMove to check as part of an if statement because it will keep any changes it does.
+								if (player->location != tempCurrentLocation)
 								{
-									player->PlayerMove(player->location->GetDirections()[verb], dir);
-									Look(player); //this is so that you only look around if you reach a new location
+									Look(player);
+									tempCurrentLocation = player->location;
 								}
-								else player->PlayerMove(player->location->GetDirections()[verb], dir); 
-
-
-
+								
 								foundCommand = true;
 								break;
 							}
 						}
-						if (d == verb && d == "help")
+						if (d == "help")
 						{
 							std::cout << "So here's the deal." << "\n";
 							std::cout << "Controls: " << "\n";
@@ -646,33 +743,38 @@ int main()
 							foundCommand = true;
 
 						}
-						else if ((d == verb && d == "take") || (d == verb && d == "drop"))
+						else if ((  d == "take") || (  d == "drop"))
 						{
-							allowNoun = true; // continued from line 668
+							allowNoun = true; // continued from line 794
 							foundCommand = true;
 						}
-						else if (d == verb && d == "look")
+						else if (  d == "look")
 						{
 							Look(player);
 							foundCommand = true;
 						}
-						else if (d == verb && d == "open")
+						else if ( d == "open")
 						{
-							std::cout << "CONTAINERS NOT IMPLEMENTED YET.";
+							// continued from line 794
 							allowNoun = true;
 							foundCommand = true;
 						}
-						else if (d == verb && d == "inspect")
+						else if (  d == "inspect")
 						{
-							allowNoun = true; // continued from line 689
+							allowNoun = true; // continued from line 794
 							foundCommand = true;
 						}
-						else if (d == verb && d == "inventory")
+						else if (  d == "inventory")
 						{
 							player->GetInventory()->ReadInventory();
 							foundCommand = true;
 						}
-						else if (d == verb && d == "quit")
+						else if (  d == "status")
+						{
+							player->PrintStatus();
+							foundCommand = true;
+						}
+						else if (  d == "quit")
 						{
 							gameLoop = false;
 							foundCommand = true;
@@ -713,7 +815,7 @@ int main()
 				}
 				else if (verb == "open")
 				{
-					//NOT IMPLEMENTED YET will use Search Inventory
+					//Inventor
 					std::cout << "not implemented yet";
 				}
 				else if (verb == "inspect")

@@ -13,10 +13,10 @@ Player::~Player()
 
 bool Player::HasItem(Item* i)
 {
-    if (inventory->GetItem(i))
-    {
-        return true;
-    }
+    //if (inventory->GetItem(i->GetName()))
+    //{
+    //    return true;
+    //}
     return false;
 }
 
@@ -71,7 +71,7 @@ bool Player::PlayerMove(Location* t, std::string dir)
 
     if (location->GetLockedPaths().size() != 0)
     {
-        if (HasItem(location->GetLockedPaths()[dir]))
+        if (HasItem(location->GetLockedPaths()[dir]) || location->GetLockedPaths()[dir] == nullptr)
         {
             location = t;
             steps++;
