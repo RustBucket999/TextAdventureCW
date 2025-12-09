@@ -16,8 +16,9 @@ public:
 	bool Open();
 	void AddItem(Item* item);
 	void RemoveItem(Item* item);
-	Item* GetKey(Item* item);
+	virtual Item* GetKey() override;
 	virtual bool TryAddItem(Item* item) override;
 	virtual bool TryLock(Item* item) override;
-	virtual bool TryOpen(Inventory* inv) override;
+	virtual bool TryOpen() override;
+	virtual std::list<Item*> GetContents() override;
 };

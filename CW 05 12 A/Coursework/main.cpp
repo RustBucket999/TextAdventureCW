@@ -812,7 +812,17 @@ int main()
 				}
 				else if (verb == "open")
 				{
-					player->GetInventory()->GetItem(noun)->TryOpen(player->GetInventory());//try opening with items inside the same inventory
+					if (inventory->GetItem(noun)->TryOpen())
+					{
+						Item* container = inventory->GetItem(noun); // store the container
+						Item* key = inventory->GetItem(noun)->GetKey(); // store its key
+						if (inventory->GetItem(key->GetName()))
+						{
+							//container-> FINISH OPENING AND MAP PLSSS
+						}
+					}
+					
+					//player->GetInventory()->GetItem(noun)->TryOpen(player->GetInventory());//try opening with items inside the same inventory
 				}
 				else if (verb == "inspect")
 				{

@@ -1,4 +1,5 @@
 #include "Location.h"
+#include "Item.h"
 #include <iostream>
 
 Location::Location(std::string information)

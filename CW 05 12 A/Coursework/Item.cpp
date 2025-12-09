@@ -35,10 +35,20 @@ bool Item::TryLock(Item* item)
     return false;
 }
 
-bool Item::TryOpen(Inventory* inv)
+bool Item::TryOpen()
 {
     std::cout << "You cannot open non-containers." << "\n";
     return false;
+}
+
+Item* Item::GetKey()
+{
+    return nullptr;
+}
+
+std::list<Item*> Item::GetContents()
+{
+    return std::list<Item*>{};
 }
 
 

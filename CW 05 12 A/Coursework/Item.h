@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Inventory.h"
+#include <list>
 
 
 class Item
@@ -17,7 +17,9 @@ public:
 	std::string GetDescription();
 	virtual bool TryAddItem(Item* item);
 	virtual bool TryLock(Item* item);
-	virtual bool TryOpen(Inventory* inv);
+	virtual bool TryOpen();
+	virtual Item* GetKey();
+	virtual std::list<Item*> GetContents();
 
 };
 

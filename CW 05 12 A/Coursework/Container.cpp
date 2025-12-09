@@ -31,7 +31,7 @@ void Container::RemoveItem(Item* item)
 	}
 }
 
-Item* Container::GetKey(Item* item)
+Item* Container::GetKey()
 {
 	return containerKey;
 }
@@ -49,17 +49,12 @@ bool Container::TryLock(Item* item)
 	return true;
 }
 
-bool Container::TryOpen(Inventory* inv)
+bool Container::TryOpen()
 {
-	if (inv->GetItem(containerKey->GetName()) && !opened)
-	{
-		containerKey = nullptr;
-		opened = true;
-		for (Item* i : contents)
-		{
-			inv->AddItem(i);
-		}
-		contents.clear();
-	}
-	
+	return true;
+}
+
+std::list<Item*> Container::GetContents()
+{
+	return contents;
 }

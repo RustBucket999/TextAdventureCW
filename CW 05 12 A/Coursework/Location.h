@@ -30,7 +30,6 @@ private:
 	std::vector<std::string> directionNames;
 	std::map<std::string, Location*> directions;
 	std::map<std::string, Item*> lockedPaths;
-	//Make connections with maps/arrays/vectors / whatever.
 
 };
 
