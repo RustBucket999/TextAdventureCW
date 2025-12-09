@@ -170,9 +170,6 @@ void FindConnections(std::string str, Location* loc, std::vector<Location*> lMap
 		keyItem = nullptr;
 		locationID = -1;
 
-
-		
-
 	}
 
 }
@@ -815,8 +812,7 @@ int main()
 				}
 				else if (verb == "open")
 				{
-					//Inventor
-					std::cout << "not implemented yet";
+					player->GetInventory()->GetItem(noun)->TryOpen(player->GetInventory());//try opening with items inside the same inventory
 				}
 				else if (verb == "inspect")
 				{
@@ -837,33 +833,4 @@ int main()
 
 	}
 
-
-	//while (std::getline(StatsFile, line))
-	//{
-	//	if (line.rfind("HP:", 0) == 0) //rfind returns 0 not 1
-	//	{
-	//		HP = std::stoi(line.substr(3));
-	//		std::cout << "HP: " << HP << std::endl;
-	//	}
-	//	else if (line.rfind("STR:", 0) == 0)
-	//	{
-	//		STR = std::stoi(line.substr(4));
-	//		std::cout << "STR: " << STR << std::endl;
-	//	}
-	//	else if (line.rfind("ARM:", 0) == 0)
-	//	{
-	//		ARM = std::stoi(line.substr(4));
-	//		std::cout << "ARM: " << ARM << std::endl;
-	//	}
-
-	//	if (line.rfind("Item:", 0) == 0)
-	//	{
-	//		output = line.substr(6);
-	//		std::cout << "Item: " << output << std::endl;
-	//	}
-	//}
-
-
-
-	//w_StatsFile.close();
 }

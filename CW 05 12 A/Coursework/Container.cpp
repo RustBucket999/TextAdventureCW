@@ -51,15 +51,15 @@ bool Container::TryLock(Item* item)
 
 bool Container::TryOpen(Inventory* inv)
 {
-	//if (inv->GetItem(containerKey->GetName()) && !opened)
-	//{
-	//	containerKey = nullptr;
-	//	opened = true;
-	//	for (Item* i : contents)
-	//	{
-	//		inv->AddItem(i);
-	//	}
-	//	contents.clear();
-	//}
+	if (inv->GetItem(containerKey->GetName()) && !opened)
+	{
+		containerKey = nullptr;
+		opened = true;
+		for (Item* i : contents)
+		{
+			inv->AddItem(i);
+		}
+		contents.clear();
+	}
 	
 }

@@ -9,11 +9,11 @@ Inventory::~Inventory()
 {
 }
 
-Item* Inventory::GetItem(Item* i)
+Item* Inventory::GetItem(std::string i)
 {
 	for (Item* item : inventory)
 	{
-		if (item == i)
+		if (item->GetName() == i)
 		{
 			return item;
 		}
@@ -46,7 +46,7 @@ void Inventory::ReadInventory()
 
 bool Inventory::InspectItem(Item* i)
 {
-	if (GetItem(i))
+	if (GetItem(i->GetName()))
 	{
 		std::cout << i->GetName() << "\n";
 		std::cout << i->GetDescription() << "\n";

@@ -1,5 +1,6 @@
 #include "Item.h"
 #include "Location.h"
+#include "Inventory.h"
 #include <iostream>
 
 Item::Item(std::string a, std::string b)

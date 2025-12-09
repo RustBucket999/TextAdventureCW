@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Inventory.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:Inventory.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Inventory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:Inventory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Container.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:Container.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Container.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:Container.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -31,12 +23,20 @@
       "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:Location.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Container.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:Container.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Inventory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:Inventory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Inventory.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:Inventory.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Item.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:Item.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Container.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|solutionrelative:Container.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CB724BAB-0E06-45D8-81F5-12D0A390F7ED}|Coursework.vcxproj|D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -58,82 +58,82 @@
       "DocumentGroups": [
         {
           "DockedWidth": 298,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Inventory.cpp",
               "DocumentMoniker": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Inventory.cpp",
               "RelativeDocumentMoniker": "Inventory.cpp",
               "ToolTip": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Inventory.cpp",
               "RelativeToolTip": "Inventory.cpp",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAADUAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-12-09T01:46:19.898Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Item.cpp",
               "DocumentMoniker": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Item.cpp",
               "RelativeDocumentMoniker": "Item.cpp",
               "ToolTip": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Item.cpp",
               "RelativeToolTip": "Item.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAA7AAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAmwCgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-12-08T23:46:43.205Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Container.cpp",
               "DocumentMoniker": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Container.cpp",
               "RelativeDocumentMoniker": "Container.cpp",
               "ToolTip": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Container.cpp",
               "RelativeToolTip": "Container.cpp",
-              "ViewState": "AgIAAB4AAAAAAAAAAAArwDUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB4AAAAAAAAAAAArwDwAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-12-08T23:39:03.086Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "Location.cpp",
               "DocumentMoniker": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Location.cpp",
               "RelativeDocumentMoniker": "Location.cpp",
               "ToolTip": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Location.cpp",
               "RelativeToolTip": "Location.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF8AAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-12-07T20:06:34.77Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "main.cpp",
               "DocumentMoniker": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAAAQBAAAAAAAAAAArwCMBAAABAAAAAAAAAA==",
+              "ViewState": "AgIAABoDAAAAAAAAAAAmwDEDAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-12-05T16:50:05.122Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "Player.cpp",
               "DocumentMoniker": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Player.cpp",
               "RelativeDocumentMoniker": "Player.cpp",
               "ToolTip": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Player.cpp",
               "RelativeToolTip": "Player.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-12-06T20:57:38.897Z",
               "EditorCaption": ""
@@ -154,8 +154,7 @@
               "RelativeToolTip": "Player.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-12-05T17:18:57.929Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-05T17:18:57.929Z"
             },
             {
               "$type": "Document",
@@ -171,7 +170,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Container.h",
               "DocumentMoniker": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Container.h",
               "RelativeDocumentMoniker": "Container.h",
@@ -179,31 +178,30 @@
               "RelativeToolTip": "Container.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-12-08T23:38:53.132Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T23:38:53.132Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "Inventory.h",
               "DocumentMoniker": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Inventory.h",
               "RelativeDocumentMoniker": "Inventory.h",
-              "ToolTip": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Inventory.h",
-              "RelativeToolTip": "Inventory.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAXAAAAAAAAAA==",
+              "ToolTip": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Inventory.h*",
+              "RelativeToolTip": "Inventory.h*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-12-09T01:45:11.1Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "Item.h",
               "DocumentMoniker": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Item.h",
               "RelativeDocumentMoniker": "Item.h",
               "ToolTip": "D:\\UnityProjects\\TextAdventureCW\\CW 05 12 A\\Coursework\\Item.h",
               "RelativeToolTip": "Item.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-12-08T23:45:58.954Z",
               "EditorCaption": ""

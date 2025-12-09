@@ -13,7 +13,7 @@ private:
 	std::list<Item*> inventory;
 	
 public:
-	Item* GetItem(Item* item);
+	Item* GetItem(std::string i);
 	std::list<Item*> GetInventory();
 	void AddItem(Item* newItem);
 	void RemoveItem(Item* i);

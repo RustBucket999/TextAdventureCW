@@ -13,10 +13,10 @@ Player::~Player()
 
 bool Player::HasItem(Item* i)
 {
-    //if (inventory->GetItem(i->GetName()))
-    //{
-    //    return true;
-    //}
+    if (inventory->GetItem(i->GetName()))
+    {
+        return true;
+    }
     return false;
 }
 

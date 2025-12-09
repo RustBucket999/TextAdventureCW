@@ -1,4 +1,5 @@
 ﻿  Container.cpp
+  Inventory.cpp
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(13,12): error C2065: 'Item': undeclared identifier
   (compiling source file 'Container.cpp')
   
@@ -11,7 +12,7 @@ D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,6): error 
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
   (compiling source file 'Container.cpp')
   
-D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,24): error C2238: unexpected token(s) preceding ';'
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,30): error C2238: unexpected token(s) preceding ';'
   (compiling source file 'Container.cpp')
   
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(17,12): error C2065: 'Item': undeclared identifier
@@ -29,8 +30,17 @@ D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(19,18): error
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(21,19): error C2061: syntax error: identifier 'Item'
   (compiling source file 'Container.cpp')
   
-  Inventory.cpp
-D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Item.h(19,23): error C2061: syntax error: identifier 'Inventory'
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Container.cpp(54,11): error C2039: 'GetItem': is not a member of 'Inventory'
+      D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(7,7):
+      see declaration of 'Inventory'
+  
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Container.cpp(60,9): error C2660: 'Inventory::AddItem': function does not take 1 arguments
+      D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(18,7):
+      see declaration of 'Inventory::AddItem'
+      D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Container.cpp(60,9):
+      while trying to match the argument list '(Item *)'
+  
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Item.h(20,23): error C2061: syntax error: identifier 'Inventory'
   (compiling source file 'Inventory.cpp')
   
   Item.cpp
@@ -46,7 +56,7 @@ D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,6): error 
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
   (compiling source file 'Item.cpp')
   
-D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,24): error C2238: unexpected token(s) preceding ';'
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,30): error C2238: unexpected token(s) preceding ';'
   (compiling source file 'Item.cpp')
   
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(17,12): error C2065: 'Item': undeclared identifier
@@ -77,7 +87,7 @@ D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,6): error 
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
   (compiling source file 'Location.cpp')
   
-D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,24): error C2238: unexpected token(s) preceding ';'
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,30): error C2238: unexpected token(s) preceding ';'
   (compiling source file 'Location.cpp')
   
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(17,12): error C2065: 'Item': undeclared identifier
@@ -108,7 +118,7 @@ D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,6): error 
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
   (compiling source file 'main.cpp')
   
-D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,24): error C2238: unexpected token(s) preceding ';'
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,30): error C2238: unexpected token(s) preceding ';'
   (compiling source file 'main.cpp')
   
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(17,12): error C2065: 'Item': undeclared identifier
@@ -126,16 +136,24 @@ D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(19,18): error
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(21,19): error C2061: syntax error: identifier 'Item'
   (compiling source file 'main.cpp')
   
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\main.cpp(284,50): error C3312: no callable 'begin' function found for type '<error type>'
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\main.cpp(284,50): error C3312: no callable 'end' function found for type '<error type>'
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\main.cpp(284,17): error C2143: syntax error: missing ';' before ':'
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\main.cpp(284,52): error C2143: syntax error: missing ';' before ')'
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\main.cpp(385,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\main.cpp(509,31): error C2660: 'Inventory::AddItem': function does not take 1 arguments
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\main.cpp(509,18): error C2660: 'Inventory::AddItem': function does not take 1 arguments
       D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(18,7):
       see declaration of 'Inventory::AddItem'
-      D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\main.cpp(509,31):
+      D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\main.cpp(509,18):
       while trying to match the argument list '(_Ty)'
           with
           [
               _Ty=Item *
           ]
+  
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\main.cpp(818,17): error C2039: 'GetItem': is not a member of 'Inventory'
+      D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(7,7):
+      see declaration of 'Inventory'
   
   Player.cpp
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(13,12): error C2065: 'Item': undeclared identifier
@@ -150,7 +168,7 @@ D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,6): error 
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
   (compiling source file 'Player.cpp')
   
-D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,24): error C2238: unexpected token(s) preceding ';'
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(16,30): error C2238: unexpected token(s) preceding ';'
   (compiling source file 'Player.cpp')
   
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(17,12): error C2065: 'Item': undeclared identifier
@@ -167,6 +185,10 @@ D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(19,18): error
   
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(21,19): error C2061: syntax error: identifier 'Item'
   (compiling source file 'Player.cpp')
+  
+D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Player.cpp(16,20): error C2039: 'GetItem': is not a member of 'Inventory'
+      D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(7,7):
+      see declaration of 'Inventory'
   
 D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Player.cpp(30,24): error C2660: 'Inventory::AddItem': function does not take 1 arguments
       D:\UnityProjects\TextAdventureCW\CW 05 12 A\Coursework\Inventory.h(18,7):
